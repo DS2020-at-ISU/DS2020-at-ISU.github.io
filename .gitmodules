@@ -1,0 +1,3 @@
+[submodule "labs"]
+	path = labs
+	url = https://github.com/DS2020-at-ISU/labs.git
