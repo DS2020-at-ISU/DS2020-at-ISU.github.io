@@ -35,7 +35,7 @@ Make sure to replace "Your Name" in the YAML with your name.**
 
     1. **(1 point)** Which question did you pick (link to it).
 
-    1. **(1 point)** Take a screenshot (or take a picture with your phone). Make sure to place the image in the same folder as your `qmd` file  and include it in your Quarto file. You can use the syntax for links above as an example.
+    1. **(1 point)** Take a screenshot (or take a picture with your phone) of the question you chose. Make sure to place the image in the same folder as your `qmd` file  and include it in your Quarto file. You can use the syntax for links above as an example.
 
     1. **(3 points)** Relate the readings to how the question is phrased. For that, write a paragraph on what a good question should do and then state what the stackoverflow question does. Identify at least three shortcomings.
 
