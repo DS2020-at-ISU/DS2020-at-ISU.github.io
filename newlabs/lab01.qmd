@@ -102,6 +102,7 @@ Finally, collect all of your experiences and make it into one cohesive document.
 
 - Craig's note
 ```
+<br><br>
 
 GitHub uses markdown! You can view GitHub's markdown syntax [here](https://github.com/adam-p/markdown-here/wiki/markdown-cheatsheet).
 
