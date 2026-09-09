@@ -103,6 +103,7 @@ Finally, collect all of your experiences and make it into one cohesive document.
 - Craig's note
 ```
 
+GitHub uses markdown! You can view GitHub's markdown syntax [here](https://github.com/adam-p/markdown-here/wiki/markdown-cheatsheet).
 
 
 ## Grading & Submission
