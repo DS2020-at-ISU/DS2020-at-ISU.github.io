@@ -6,6 +6,14 @@ format:
         embed-resources: true
 ---
 
+---
+title: "DS 2020 - Homework #2"
+author: "Your name"
+format:
+    html:
+        embed-resources: true
+---
+
 ```{r}
 #| label: setup
 #| echo: false
@@ -54,7 +62,7 @@ data(banknote)
     a. **structure of the plot**: what type of plot is it? Which variables are mapped to x, to y, and to the (fill) color?
     b. **main message of the plot**: what is your main finding, i.e., what do you want viewers to learn from the plot?
     c. **additional message**: point out anomalies or outliers, if there are any.
-    
+
 
 8. **(1 pts)** Ensure that your submission is reproducible. We will load your qmd file into Positron and render it. This should match your submitted HTML file.
 
