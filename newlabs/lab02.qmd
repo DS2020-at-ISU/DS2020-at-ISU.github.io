@@ -1,0 +1,118 @@
+---
+title: "DS 2020 - Lab #2: Ames Housing Data"
+author: Prof Daddysman
+date: "`r Sys.Date()`"
+format: 
+    html:
+        embed-resources: true
+---
+
+```{r}
+#| label: setup
+#| echo: false
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+# Lab #2: Exploring Ames Housing Data
+
+## Overview
+
+In this lab, we will explore the Ames Housing Data (`ames`) from the `classdata` package and write up our findings in a team-edited report. The dataset contains residential sales data in Ames, Iowa, from 2017 to 2022. (See `?ames` in the Console for more information.)
+
+You will explore the data as a group and write up your findings. You will do this in your GitHub repository for Lab #2 in Classroom 50. This time, you will be editing the `qmd` file, then render to the `md` README file. **Do not edit the `md` file directly!**
+
+## What you need to do
+
+### As a team:
+
+Step 1. tl;dr: Write a brief summary ***after*** completing the other steps.
+
+Step 2. Inspect the first few lines of the dataset.
+
+* What variables are there?
+* What types of variables are they?
+* What does each variable mean?
+* What do you expect their data ranges to be? (Take an educated guess!)
+
+Step 3. Begin the exploration with the main variable, `Sale Price`. Use `dplyr` and `ggplot2`.
+
+* What is the range of this variable?
+* Create a histogram to visualize the distribution. (Make sure to adjust bin width!)
+* What is the general pattern? Are there any unusual values or outliers? (Hint: look for gaps!)
+
+### Individually (recording in the shared document):
+
+Step 4. Choose a second variable that may relate to `Sale Price`. Use `dplyr` and `ggplot2`.
+
+* What is the range of this variable? Plot it and describe the pattern. Are there any unusual values or outliers?
+    + Do you need to use `dplyr` to filter before continuing?
+* Explore the relationship between this variable and `Sale Price`. Use a scatterplot, boxplot, or faceted bar chart - whichever is most appropriate.
+* Describe the pattern. Does this second variable help explain anything you observed about `Sale Price`?
+
+
+## Grading and submission:
+
+**Grading**: We expect equal contributions from all members in a team. For the grading, we will make use of the GitHub commit history to verify that everyone contributed. *There will be different grades, if necessary.* You may choose to "divide and conquer" for the first 3 steps; please note this as part of the **tl;dr** section if this is the case.
+
+* Step 1: 2 points
+* Step 2: 2 points
+* Step 3: 2 points
+* Step 4: 4 points
+
+**Submission**: All submissions to the GitHub repo will be automatically uploaded/collected for grading once the due date has passed. 
+
+**Due date**: Monday at 5 pm. You have time until Monday at 11:59 pm to submit final edits to the `README.qmd` file. Make sure that the file renders and there are no commit issues.
+
+
+## Now...
+
+1. Identify your team! Go to Canvas and findout which team you are in for Lab 2.
+
+1. Find the other members of your team and sit with them.
+
+1. Introduce yourself to each other. 
+
+1. If someone is missing from your group, let the instructor or TA know.
+
+1. Follow the steps above.
+
+
+
+## Join Your Lab Repo in Classroom 50
+
+Accept the link to Classroom 50 shared on today's Canvas page.
+  
+  - This link will ask you to log in to GitHub. Select your name from the list by clicking on it.  
+  
+  - Accept the Lab #2 assignment in our course.
+
+  - Check if your team number already exists as a group.
+    - If it does, ask the team member who created it to add you.
+        - You can add members by clicking on your group and selecting "add members"
+    - If it doesn't exist yet, create it yourself.
+        - Name the team the same as it is on Canvas (e.g., team1, team2, etc.)
+        - Add your group members that are here today (using their GitHub username)
+
+**Note**: Classroom50 automatically names the repos based on creation order; as long as you set up the repo name with your team name/number, we'll be able to find you.
+
+## Remember the GitHub steps
+
+1. Open a [git repository in Positron](https://positron.posit.co/git.html#open-a-git-repository) from the existing git repository for the assignment
+    A) New > New Folder from Git 
+    A) In "Repository URL", past the URL of your group's GitHub repository. You can find this under the `<>Code` button; just copy the `HTTPS` URL.
+    A) Set the parent folder to be the folder you created for this class.
+    A) Select "OK"
+
+1. In Positron, modify the `README.qmd` file as you complete the assignment.
+    * Make sure to check for and sync changes often! This will avoid major commit issues later.
+
+1. Stage changes
+    A) Select "Source Control" in the left pane (looks like a branch)
+    A) Under "Changes", select the `+` to stage changes
+
+1. Commit changes to your local repo. 
+    A) Add a commit message above the blue commit button
+    A) Select "Commit"
+
+1. Sync changes: once you have done a commit, select "Sync Changes". This will push changes and pull new changes from others.
+    * Errors? Do a separate pull action, resolve merge changes, then repeat.
