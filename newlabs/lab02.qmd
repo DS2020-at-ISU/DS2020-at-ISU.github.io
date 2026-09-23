@@ -63,6 +63,8 @@ Step 4. Choose a second variable that may relate to `Sale Price`. Use `dplyr` an
 
 **Due date**: Monday at 5 pm. You have time until Monday at 11:59 pm to submit final edits to the `README.qmd` file. Make sure that the file renders and there are no commit issues.
 
+**Hint**: When doing commits, only stage and commit the `README.qmd` file first. Once you are able to successfully commit that file (i.e., resolve all merge conflicts), then stage and commit the `README.md` file (render first, if you made any changes to the `qmd`).
+
 
 ## Now...
 
@@ -80,7 +82,7 @@ Step 4. Choose a second variable that may relate to `Sale Price`. Use `dplyr` an
 
 ## Join Your Lab Repo in Classroom 50
 
-Accept the link to Classroom 50 shared on today's Canvas page.
+Accept the link to Classroom 50 shared on today's Canvas page and in the Lab #2 assignment on Canvas.
   
   - This link will ask you to log in to GitHub. Select your name from the list by clicking on it.  
   
