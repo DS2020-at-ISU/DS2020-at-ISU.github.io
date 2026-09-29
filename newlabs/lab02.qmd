@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 In this lab, we will explore the Ames Housing Data (`ames`) from the `classdata` package and write up our findings in a team-edited report. The dataset contains residential sales data in Ames, Iowa, from 2017 to 2022. (See `?ames` in the Console for more information.)
 
-You will explore the data as a group and write up your findings. You will do this in your GitHub repository for Lab #2 in Classroom 50. This time, you will be editing the `qmd` file, then render to the `md` README file. **Do not edit the `md` file directly!**
+You will explore the data as a group and write up your findings. You will do this in your GitHub repository for Lab #2 in Classroom 50. This time, you will be editing the `qmd` file and pushing it to the repo. Your repo is set up to automatically render this to the `md` file. **Do not edit the `md` file directly!**
 
 ## What you need to do
 
@@ -37,7 +37,7 @@ Step 2. Inspect the first few lines of the dataset.
 Step 3. Begin the exploration with the main variable, `Sale Price`. Use `dplyr` and `ggplot2`.
 
 * What is the range of this variable?
-* Create a histogram to visualize the distribution. (Make sure to adjust bin width!)
+* Create a histogram to visualize the distribution. (Make sure to adjust bin width!) An example is provided for you; you can use this as a starting point, but you must make changes to it.
 * What is the general pattern? Are there any unusual values or outliers? (Hint: look for gaps!)
 
 ### Individually (recording in the shared document):
@@ -61,9 +61,9 @@ Step 4. Choose a second variable that may relate to `Sale Price`. Use `dplyr` an
 
 **Submission**: All submissions to the GitHub repo will be automatically uploaded/collected for grading once the due date has passed. 
 
-**Due date**: Monday at 5 pm. You have time until Monday at 11:59 pm to submit final edits to the `README.qmd` file. Make sure that the file renders and there are no commit issues.
+**Due date**: Monday at 5 pm. You have time until Monday at 11:59 pm to submit final edits to the `README.qmd` file. Make sure that there are no commit issues.
 
-**Hint**: When doing commits, only stage and commit the `README.qmd` file first. Once you are able to successfully commit that file (i.e., resolve all merge conflicts), then stage and commit the `README.md` file (render first, if you made any changes to the `qmd`).
+**Hint**: When doing commits, only stage and commit the `README.qmd` file. Any other files should not be pushed to the repo.
 
 
 ## Now...
@@ -95,7 +95,7 @@ Accept the link to Classroom 50 shared on today's Canvas page and in the Lab #2 
         - Name the team the same as it is on Canvas (e.g., team1, team2, etc.)
         - Add your group members that are here today (using their GitHub username)
 
-**Note**: Classroom50 automatically names the repos based on creation order; as long as you set up the repo name with your team name/number, we'll be able to find you.
+**Note**: Classroom 50 automatically names the repos based on creation order; as long as you set up the repo name with your team name/number, we'll be able to find you.
 
 ## Remember the GitHub steps
 
