@@ -110,7 +110,7 @@ Accept the link to Classroom 50 shared on today's Canvas page and in the Lab #2 
 
 1. Stage changes
     A) Select "Source Control" in the left pane (looks like a branch)
-    A) Under "Changes", select the `+` to stage changes
+    A) Under "Changes", select the `+` to stage changes. (Only stage the `qmd` file!)
 
 1. Commit changes to your local repo. 
     A) Add a commit message above the blue commit button
