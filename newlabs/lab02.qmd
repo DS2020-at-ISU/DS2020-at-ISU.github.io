@@ -82,7 +82,7 @@ Step 4. Choose a second variable that may relate to `Sale Price`. Use `dplyr` an
 
 ## Join Your Lab Repo in Classroom 50
 
-Accept the link to Classroom 50 shared on today's Canvas page and in the Lab #2 assignment on Canvas.
+Accept the link to Classroom 50 shared in the Lab #2 assignment on Canvas.
   
   - This link will ask you to log in to GitHub. Select your name from the list by clicking on it.  
   
