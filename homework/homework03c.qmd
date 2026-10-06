@@ -1,0 +1,67 @@
+---
+title: "DS 2020 - Homework #3"
+author: "Your name"
+format:
+    html:
+        embed-resources: true
+---
+
+```{r}
+#| label: setup
+#| echo: false
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Chick Weights
+
+The `ChickWeight` data set is part of the base package `datasets`. See `?ChickWeight` for details on the data. For all of the questions use `dplyr` functions whenever possible.
+
+1. **(0.5 pts)** Download the Quarto (qmd) file with these homework instructions to use as a template for your work. Make sure to replace "Your Name" in the YAML with your name. To get full points, show your R code (in a code chunk) and write answers to the questions.
+
+2. **(1 pt)** What variables are part of the dataset?
+```{r}
+
+```
+
+> answer
+
+
+3. **(2 pts)** Get a frequency breakdown of the number of chicks, their average weight, and the standard deviation of the weights in each of the diets at the start of the study.
+
+- extra credit (1 pt): construct a ggplot that shows average weights by diet with an interval (shown as a line) of +- the standard deviation around the averages. (Hint: read this article regarding [ggplot error bars](http://www.sthda.com/english/wiki/ggplot2-error-bars-quick-start-guide-r-software-and-data-visualization))
+```{r}
+
+```
+
+> answer
+
+
+4. **(2 pts)** Each chick should have twelve weight measurements. Use the `dplyr` package to identify how many chicks have a complete set of weight measurements and how many measurements there are on average in the incomplete cases. Extract a subset of the data for all chicks with complete information and name the data set `complete`. (Hint: you might want to use mutate to introduce a helper variable consisting of the number of observations)
+```{r}
+
+```
+
+> answer
+
+
+5. **(2 pts)** In the complete data set introduce a new variable that measures the current weight difference compared to day 0. Name this variable `weightgain`. (Hint: use mutate and `?mutate` to check the parameter `.by`. This parameter can create a temporary `group_by` so that we can do calculation in each subgroup, i.e. for each combination of chick and diet, `weight - min(weight)`)
+```{r}
+
+```
+
+> answer
+
+
+6. **(2 pts)** Use `ggplot2` to create side-by-side boxplots of `weightgain` by `Diet` for day 21. Describe the relationship in 2-3 sentences. Change the order of the categories in the Diet variable such that the boxplots are ordered by median `weightgain`.
+```{r}
+
+```
+
+> answer
+
+
+7. **(0.5 pts)** Ensure that your submission is reproducible. We will load your qmd file into Positron and render it. This should match your submitted HTML file.
+
+
+For the submission: On Canvas, submit your solution in a Quarto (qmd) file and the corresponding HTML file with it, in one zipped folder.
+
