@@ -52,7 +52,7 @@ The `ChickWeight` data set is part of the base package `datasets`. See `?ChickWe
 > answer
 
 
-5. **(2 pts)** In the complete data set introduce a new variable that measures the current weight difference compared to day 0. Name this variable `weightgain`. (Hint: use mutate and `?mutate` to check the parameter `.by`. This parameter can create a temporary `group_by` so that we can do calculation in each subgroup, i.e. for each combination of chick and diet, `weight - min(weight)`)
+5. **(2 pts)** In the complete data set introduce a new variable that measures the current weight difference compared to day 0. Name this variable `weightgain`. (Hint: use mutate and `?mutate` to check the parameter `.by`. This parameter can create a temporary `group_by` so that we can do calculation in each subgroup, i.e. weight - Time 0 weight for each chick)
 ```{r}
 
 ```
@@ -60,7 +60,7 @@ The `ChickWeight` data set is part of the base package `datasets`. See `?ChickWe
 > answer
 
 
-6. **(2 pts)** Use `ggplot2` to create side-by-side boxplots of `weightgain` by `Diet` for day 21. Describe the relationship in 2-3 sentences. Change the order of the categories in the Diet variable such that the boxplots are ordered by median `weightgain`.
+6. **(2 pts)** Use `ggplot2` to create side-by-side boxplots of `weightgain` by `Diet` at day 21. Describe the relationship in 2-3 sentences. Change the order of the categories in the Diet variable such that the boxplots are ordered by median `weightgain`.
 ```{r}
 
 ```
