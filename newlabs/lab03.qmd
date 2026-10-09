@@ -1,0 +1,135 @@
+---
+title: "DS 2020 - Lab #3: Avengers"
+date: "`r Sys.Date()`"
+format: 
+    html:
+        embed-resources: true
+---
+
+```{r}
+#| label: setup
+#| echo: false
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+
+[![](images/avengers.jpg)](https://upload.wikimedia.org/wikipedia/en/2/2b/Avengers_%28Marvel_Comics%29_vol_3_num_38.jpg")
+
+# Lab #3: Avengers
+
+## Overview
+
+In this lab, we are going to
+
+1. Reshape a data set
+2. Use the data to fact-check some statistics in a published report. 
+
+The deliverable is, again, a team-edited report. You will do this in your GitHub repository for Lab #3 in Classroom 50. As before, you will be editing the `qmd` file and pushing it to the repo. Your repo is set up to automatically render this to the `md` file. **Do not edit the `md` file directly!**
+
+The overall aim of this lab is to tidy a data set, then use it for fact-checking a report.
+
+
+## Data Background
+
+In a universe where time travel, alternate lifelines, and portals with all kinds of powers exist, dying might be less permanent than in the world that we are used to. 
+
+The data were collected by Walt Hickey at FiveThirtyEight in 2015. This time we are interested in a review of life and death among the Avengers, a group of super heroes in the Marvel universe; the accompanying article is archived [here](https://web.archive.org/web/20150512194216/http://fivethirtyeight.com/features/avengers-death-comics-age-of-ultron/), and the description of the data is [here](https://github.com/fivethirtyeight/data/tree/master/avengers).
+
+We can access the resulting data using the command:
+
+```{r}
+avengers <- read.csv("https://github.com/fivethirtyeight/data/raw/refs/heads/master/avengers/avengers.csv")
+head(avengers)
+```
+
+
+## What you need to do
+
+### As a team: data tidying
+
+The avenger data consists of ten columns for each avenger called Death[1-5] to Return[1-5].
+
+1. Get the data into a format where the five columns for Death[1-5] are replaced by two columns: Time, and Death. 
+    * Time should be a number between 1 and 5 (look into the function `parse_number`)
+    * Death is a categorical variables with values "YES", "NO" and "". 
+    * Call the resulting data set `deaths`. (Note: you can filter out `""`, the empty strings, from this result.)
+
+2. Similarly, deal with the returns of characters. Call this dataset `returns`.
+
+3. Based on these datasets:
+    * What is the average number of deaths an Avenger suffers?
+    * What is the average number of returns an Avenger has?
+
+
+### Individually (recording in shared document): fact checking
+
+4. Choose one of the statements in the [article](https://web.archive.org/web/20150512194216/http://fivethirtyeight.com/features/avengers-death-comics-age-of-ultron/) and fact check it based on the data. 
+    * Use `dplyr` functionality whenever possible.
+    * Upload the claim, code to check the claim, and your response to the repository. Make sure to include your name with the claim you chose.
+    * Discuss and refine answers as a team.
+
+
+
+## Grading and submission:
+
+**Grading**: We expect equal contributions from all members in a team. For the grading, we will make use of the GitHub commit history to verify that everyone contributed. *There will be different grades, if necessary.* You may choose to "divide and conquer" for the first 3 steps or to have one person commit all the analyses. Please note which is true for your team.
+
+**Submission**: All submissions to the GitHub repo will be automatically uploaded/collected for grading once the due date has passed. Please submit a link to your team's repo on Canvas (everyone!).
+
+**Due date**: Monday at 5 pm. You have time until Monday at 11:59 pm to submit final edits to the `README.qmd` file. Make sure that there are no commit issues.
+
+**Hint**: When doing commits, only stage and commit the `README.qmd` file. Any other files should not be pushed to the repo.
+
+
+## Now...
+
+1. Identify your team! Go to Canvas and findout which team you are in for Lab 2.
+
+1. Find the other members of your team and sit with them.
+
+1. Introduce yourself to each other. 
+
+1. If someone is missing from your group, let the instructor or TA know.
+
+1. Follow the steps above.
+
+
+## Join Your Lab Repo in Classroom 50
+
+Accept the link to Classroom 50 shared in the Lab #3 assignment on Canvas.
+  
+  - This link will ask you to log in to GitHub. Select your name from the list by clicking on it.  
+  
+  - Accept the Lab #3 assignment in our course.
+
+  - Check if your team number already exists as a group.
+    - If it does, ask the team member who created it to add you.
+        - You can add members by clicking on your group and selecting "add members"
+    - If it doesn't exist yet, create it yourself.
+        - Name the team the same as it is on Canvas (e.g., team1, team2, etc.)
+        - Add your group members that are here today (using their GitHub username)
+
+**Note**: Classroom 50 automatically gives the repos a link number based on creation order; as long as you set up the repo with your team name/number when you create it, we'll be able to find you.
+
+
+## Remember the GitHub steps
+
+1. Open a [git repository in Positron](https://positron.posit.co/git.html#open-a-git-repository) from the existing git repository for the assignment
+    A) New > New Folder from Git 
+    A) In "Repository URL", past the URL of your group's GitHub repository. You can find this under the `<>Code` button; just copy the `HTTPS` URL.
+    A) Set the parent folder to be the folder you created for this class.
+    A) Select "OK"
+
+1. In Positron, modify the `README.qmd` file as you complete the assignment.
+    * Make sure to check for and sync changes often! This will avoid major commit issues later.
+
+1. Stage changes
+    A) Select "Source Control" in the left pane (looks like a branch)
+    A) Under "Changes", select the `+` to stage changes. (Only stage the `qmd` file!)
+
+1. Commit changes to your local repo. 
+    A) Add a commit message above the blue commit button
+    A) Select "Commit"
+
+1. Sync changes: once you have done a commit, select "Sync Changes". This will push changes and pull new changes from others.
+    * Errors? Do a separate pull action, resolve merge changes, then repeat.
