@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-10-09">
+<meta name="dcterms.date" content="2026-10-13">
 
 <title>DS 2020 - Lab #3: Avengers</title>
 <style>
@@ -2190,7 +2190,7 @@ vertical-align: -.125em;
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 9, 2026</p>
+      <p class="date">October 13, 2026</p>
     </div>
   </div>
   
@@ -2217,9 +2217,8 @@ vertical-align: -.125em;
 </section>
 <section id="data-background" class="level2">
 <h2 class="anchored" data-anchor-id="data-background">Data Background</h2>
-<p>In a universe where time travel, alternate lifelines and portals with all kinds of powers exist, dying might be less permanent than in the world that we are used to.</p>
-<p>The data were collected by Walt Hickey at FiveThirtyEight in 2015. This time we are interested in a review of life and death among the Avengers, a group of super heroes in the Marvel universe; the accompanying article is archived <a href="https://web.archive.org/web/20150512194216/http://fivethirtyeight.com/features/avengers-death-comics-age-of-ultron/">here</a>.</p>
-<p>The description of the data is <a href="https://github.com/fivethirtyeight/data/tree/master/avengers">here</a></p>
+<p>In a universe where time travel, alternate lifelines, and portals with all kinds of powers exist, dying might be less permanent than in the world that we are used to.</p>
+<p>The data were collected by Walt Hickey at FiveThirtyEight in 2015. This time we are interested in a review of life and death among the Avengers, a group of super heroes in the Marvel universe; the accompanying article is archived <a href="https://web.archive.org/web/20150512194216/http://fivethirtyeight.com/features/avengers-death-comics-age-of-ultron/">here</a>, and the description of the data is <a href="https://github.com/fivethirtyeight/data/tree/master/avengers">here</a>.</p>
 <p>We can access the resulting data using the command:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>avengers <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://github.com/fivethirtyeight/data/raw/refs/heads/master/avengers/avengers.csv&quot;</span>)</span>
@@ -2289,7 +2288,7 @@ vertical-align: -.125em;
 <li>Choose one of the statements in the <a href="https://web.archive.org/web/20150512194216/http://fivethirtyeight.com/features/avengers-death-comics-age-of-ultron/">article</a> and fact check it based on the data.
 <ul>
 <li>Use <code>dplyr</code> functionality whenever possible.</li>
-<li>Upload the claim, code to check the claim, and response to the repository. Make sure to include your name with the claim you chose.</li>
+<li>Upload the claim, code to check the claim, and your response to the repository. Make sure to include your name with the claim you chose.</li>
 <li>Discuss and refine answers as a team.</li>
 </ul></li>
 </ol>
@@ -2300,7 +2299,7 @@ vertical-align: -.125em;
 <p><strong>Grading</strong>: We expect equal contributions from all members in a team. For the grading, we will make use of the GitHub commit history to verify that everyone contributed. <em>There will be different grades, if necessary.</em> You may choose to “divide and conquer” for the first 3 steps or to have one person commit all the analyses. Please note which is true for your team.</p>
 <p><strong>Submission</strong>: All submissions to the GitHub repo will be automatically uploaded/collected for grading once the due date has passed. Please submit a link to your team’s repo on Canvas (everyone!).</p>
 <p><strong>Due date</strong>: Monday at 5 pm. You have time until Monday at 11:59 pm to submit final edits to the <code>README.qmd</code> file. Make sure that there are no commit issues.</p>
-<p><strong>Hint</strong>: When doing commits, only stage and commit the <code>README.qmd</code> file. Any other files should not be pushed to the repo.</p>
+<p><strong>Note</strong>: When doing commits, only stage and commit the <code>README.qmd</code> file. Any other files should not be pushed to the repo. * If you want to use a package other than <code>tidyverse</code> or if you want to add a graph to your report (<code>ggplot</code>), please let the instructor/TA know so that we can make the necessary backend changes.</p>
 </section>
 <section id="now" class="level2">
 <h2 class="anchored" data-anchor-id="now">Now…</h2>
