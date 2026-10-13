@@ -78,7 +78,9 @@ The avenger data consists of ten columns for each avenger called Death[1-5] to R
 
 **Due date**: Monday at 5 pm. You have time until Monday at 11:59 pm to submit final edits to the `README.qmd` file. Make sure that there are no commit issues.
 
-**Note**: When doing commits, only stage and commit the `README.qmd` file. Any other files should not be pushed to the repo.
+**Notes**: 
+
+* When doing commits, only stage and commit the `README.qmd` file. Any other files should not be pushed to the repo.
 * If you want to use a package other than `tidyverse` or if you want to add a graph to your report (`ggplot`), please let the instructor/TA know so that we can make the necessary backend changes.
 
 
