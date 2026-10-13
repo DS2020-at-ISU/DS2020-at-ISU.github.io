@@ -1,0 +1,164 @@
+---
+title: "DS 2020 - Sample Midterm #1"
+author: "Your name"
+format:
+    html:
+        embed-resources: true
+---
+
+
+```{r}
+#| label: setup
+#| echo: false
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message=FALSE)
+```
+
+## Overview
+
+This is an open book, open note exam. You have 80 mins of time to submit your answers to the questions. 
+I expect you to adhere to academic integrity, i.e., all of the work shown is your own. Do not solicit, accept, or give any direct or indirect help on the questions from or to anyone. Do not use GenAI on this exam.
+
+Please be aware that you will have to sign off on the following statement during the submission process:
+
+> I affirm that the work on this exam is my own. I will not use any outside sources (such as GenAI) or people to help me, nor will I share any part of this exam or my work with others without permission of the instructor.
+
+
+## March Madness
+
+Basketball is a multimillion dollar sports that fascinates millions of people all year round, peaking in March Madness each year.
+Here, we are using play-by-play data on all NBA games on two days in Oct 2017. 
+
+Provide code for all of your answers. Make sure to include answers to each of the questions outside of the code chunks.
+
+### Question #1: First Overview
+
+Read the data from [sample-combined-pbp-stats.csv](https://raw.githubusercontent.com/DS202-at-ISU/DS202-at-ISU.github.io/master/exams/sample-combined-pbp-stats.csv) without downloading the file locally. (Hint: `?read.csv`)
+Each line of the file describes one play in a game. 
+
+```{r}
+# write your code here
+
+```
+
+- How many rows and columns does the data have? What are the variables called?
+
+```{r}
+# write your code here
+
+```
+
+
+- Each individual game is assigned a unique identifier `game_id`. How many games are recorded in the data? How many plays (number of rows) does a game have on average?
+
+```{r}
+# write your code here
+
+```
+
+
+### Question #2: Who won? 
+
+For each game, the variable `points` keeps track of the number of points attempted in each play. 
+
+- Use functions from the `dplyr` package to work out the number of points each team scored (check `result`). Filter out all plays that are not associated with any of the teams. 
+
+```{r}
+# write your code here
+
+```
+
+- Compare your scores with the final values of home and away scores (check for `event_type` and `period`)
+
+```{r}
+# write your code here
+
+```
+
+- Using `ggplot2`, plot scores by team. Sort teams by their median scores.
+
+```{r}
+# write your code here
+
+```
+
+- In a second step, use the scores to identify winning and losing teams of each game (Hint: use dplyr again and remember what `which.max` and `which.min` are doing). 
+
+```{r}
+# write your code here
+
+```
+
+- `player` keeps track of which player makes a shot. For each game, identify which player in each team scored the most points. (Hint: `?rank`)
+
+```{r}
+# write your code here
+
+```
+
+
+### Question #3 : On the court
+
+The variables `converted_x` and `converted_y` give the location of the acting player on the court.
+
+- Check the variable `event_type` to see for which types of play we have geographic information.
+
+```{r}
+# write your code here
+
+```
+
+- For game number `21700003`, plot the geographic location of each play on the court, colour by team, and incorporate visually the play's outcome (variable `result`). 
+
+```{r}
+# write your code here
+
+```
+
+
+### Question #4: Distance hurts?
+
+Is there any evidence that shots closer to the basket are successful more often? To answer this question:
+
+- Introduce a new variable `d` into the data that captures the distance of a player from the basket (basket is in [0,0] for variables `original_x` and `original_y`).
+
+```{r}
+# write your code here
+```
+
+- Draw side-by-side boxplots of distance by result and team (using `ggplot2`). Interpret. (Hint: you can put either `result` or `team` on the x-axis and the remaining variable into facet)
+
+```{r}
+# write your code here
+
+```
+
+
+### Question #5: Who is playing?
+
+Variables `h1` through `h5` and `a1` through `a5` are the five players of the home team and the away team on the field at that moment, in positions 1 through 5.
+
+- Reshape the data set to combine all player variables. Extract position numbers. 
+
+```{r}
+# write your code here
+
+```
+
+- For each game, identify how many players were playing in each position. 
+
+```{r}
+# write your code here
+
+```
+
+- Draw side-by-side boxplots of the number of players by position. Describe the plot and what it means in 2-3 sentences.
+
+```{r}
+# write your code here
+
+```
+
+
+
+
+
