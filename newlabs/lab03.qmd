@@ -86,7 +86,7 @@ The avenger data consists of ten columns for each avenger called Death[1-5] to R
 
 ## Now...
 
-1. Identify your team! Go to Canvas and findout which team you are in for Lab 2.
+1. Identify your team! Go to Canvas and findout which team you are in for Lab 3.
 
 1. Find the other members of your team and sit with them.
 
