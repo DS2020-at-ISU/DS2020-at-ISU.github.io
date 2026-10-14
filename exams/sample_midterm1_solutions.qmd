@@ -1,0 +1,303 @@
+---
+title: "DS 2020 - Sample Midterm #1"
+author: "Sample Solutions"
+format:
+    html:
+        embed-resources: true
+---
+
+
+```{r}
+#| label: setup
+#| echo: false
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message=FALSE)
+```
+
+## Overview
+
+This is an open book, open note exam. You have 80 mins of time to submit your answers to the questions. 
+I expect you to adhere to academic integrity, i.e., all of the work shown is your own. Do not solicit, accept, or give any direct or indirect help on the questions from or to anyone. Do not use GenAI on this exam.
+
+Please be aware that you will have to sign off on the following statement during the submission process:
+
+> I affirm that the work on this exam is my own. I will not use any outside sources (such as GenAI) or people to help me, nor will I share any part of this exam or my work with others without permission of the instructor.
+
+
+## March Madness
+
+Basketball is a multimillion dollar sports that fascinates millions of people all year round, peaking in March Madness each year.
+Here, we are using play-by-play data on all NBA games on two days in Oct 2017. 
+
+Provide code for all of your answers. Make sure to include answers to each of the questions outside of the code chunks.
+
+### Question #1: First Overview
+
+Read the data from [sample-combined-pbp-stats.csv](https://raw.githubusercontent.com/DS202-at-ISU/DS202-at-ISU.github.io/master/exams/sample-combined-pbp-stats.csv) without downloading the file locally. (Hint: `?read.csv`)
+Each line of the file describes one play in a game. 
+
+```{r}
+library(tidyverse)
+pbp <- read.csv("https://raw.githubusercontent.com/DS202-at-ISU/DS202-at-ISU.github.io/master/exams/sample-combined-pbp-stats.csv")
+```
+
+- How many rows and columns does the data have? What are the variables called?
+
+```{r}
+# Find rows and columns
+dim(pbp)
+
+# Find variables
+colnames(pbp)
+```
+
+There are 2386 rows (plays) and 44 variables. Variables include the game ID, the date, players (a1-a5 and h1-h5), score, time elapsed and remaining, and the type of event (play) that occurred.
+
+
+- Each individual game is assigned a unique identifier `game_id`. How many games are recorded in the data? How many plays (number of rows) does a game have on average?
+
+```{r}
+# Using length & unique to find how many games and the number of unique games
+length(unique(pbp$game_id))
+
+# Grouping by game_id to find number of rows within each game_id
+pbp |>
+    group_by(game_id) |>
+    tally() |>
+    summary()
+```
+
+There are 5 games recorded in the data. On average, a game has 477.2 plays.
+
+
+### Question #2: Who won? 
+
+For each game, the variable `points` keeps track of the number of points attempted in each play. 
+
+- Use functions from the `dplyr` package to work out the number of points each team scored (check `result`). Filter out all plays that are not associated with any of the teams. 
+
+```{r}
+# Grouping by both game_id and team and filtering by result removes "" teams 
+scores = pbp |>
+    group_by(game_id, team) |>
+    filter(result == "made") |> # only include shots that were made
+    summarize(
+        score = sum(points),
+        .groups = "drop" # remove grouping structure for future use
+    )
+scores
+```
+
+There are 10 teams in the dataset. Indiana scored the most points with 140, while Charlotte scored the least with 88.
+
+
+- Compare your scores with the final values of home and away scores (check for `event_type` and `period`)
+
+```{r}
+# Use unique(pbp$event_type): "end of period"
+# Use unique(pbp$period): 4
+pbp |>
+    filter(event_type == "end of period", period==4) |> # use , here because we want the &
+    select(home_score, away_score, game_id)
+```
+
+There is a score difference; one of the baskets or teams must be missing values. Our tally shows 88 points for Charlotte, while the final score shows 90.
+
+
+
+- Using `ggplot2`, plot scores by team. Sort teams by their median scores.
+
+```{r}
+# Use ggplot, geom_point, and fct_reorder
+scores |>
+    ggplot() +
+    geom_point(aes(x = score, y = fct_reorder(team, score, .fun = median))) + 
+    labs(
+        title = "5 NBA game scores by team",
+        x = "Final score",
+        y = "Team"
+    )
+
+# Using geom_col instead of geom_point
+scores |>
+    ggplot() +
+    geom_col(aes(x = fct_reorder(.f=team, .x=score, .fun=median), y = score)) +
+    labs(
+        title = "5 NBA game scores by team",
+        x = "Team",
+        y = "Final score"
+    )
+```
+
+We can see that Charlotte scored the fewest points, while Indiana scored the most.
+
+
+
+- In a second step, use the scores to identify winning and losing teams of each game (Hint: use dplyr again and remember what `which.max` and `which.min` are doing). 
+
+```{r}
+# Group by game_id and identify which had the min and max for each.
+# Add column using mutate with this information.
+winners = scores |>
+    group_by(game_id) |>
+    mutate(
+        winner = team[which.max(score)],
+        loser = team[which.min(score)]
+    ) |>
+    ungroup() # Important to drop groups for future use
+winners
+```
+
+We can now see the winner and loser of each game by the winner and loser column instead of just by game_id. For instance, in the first game, Cleveland had a score of 102 to Boston's 99, so CLE is in the winner column and BOS is in the loser column for that game (two separate rows).
+
+
+- `player` keeps track of which player makes a shot. For each game, identify which player in each team scored the most points. (Hint: `?rank`)
+
+```{r}
+# The first part is similar to scores, but we also group by player
+players = pbp |>
+    group_by(game_id, team, player) |>
+    filter(result == "made") |> # only include shots that were made
+    summarize(
+        score = sum(points), # total score by player within team and game
+        .groups = "drop" # remove grouping structure for next part
+    ) |>
+    group_by(game_id, team) |> # regrouping per game
+    mutate(mvp = rank(-score)) |> # rank is in ascending order, so we add the - to flip this (most points comes first instead of last)
+    filter(mvp==1) # only include first rank
+players
+```
+
+The result shows the number of points the top scoring player of each team had per game. D'Angelo Russell had the most points scored for Brooklyn in their game against Indiana and the most points overall, while Victor Oladipo had the most points scored for Indiana in that same game but was the lowest scorer among the top scorers.
+
+
+
+### Question #3 : On the court
+
+The variables `converted_x` and `converted_y` give the location of the acting player on the court.
+
+- Check the variable `event_type` to see for which types of play we have geographic information.
+
+```{r}
+# Check where converted_x and converted_y are not na:
+pbp |>
+    group_by(event_type, is.na(converted_x), is.na(converted_y)) |>
+    tally()
+
+# Could also use:
+pbp |> group_by(event_type) |>
+    summarize(
+        x_missing = sum(is.na(converted_x)),
+        y_missing = sum(is.na(converted_y))
+    )
+```
+
+`converted_x` and `converted_y` are **not** NA where `event_type` is either miss or shot.
+
+
+- For game number `21700003`, plot the geographic location of each play on the court, colour by team, and incorporate visually the play's outcome (variable `result`). 
+
+```{r}
+# Filter by game_id
+pbp |> filter(game_id==21700003) |>
+    ggplot(aes(x = converted_x, y = converted_y)) +
+    geom_point(aes(color=team, shape=result)) +
+    coord_equal() # ensures that x and y axis coordinates are in a fixed ratio
+```
+
+We can see a pattern in shots made and attempted. There are clusters near where the baskets would be on either end of the court, with larger spread out from there, with a clear arc around the 3-point line.
+
+
+### Question #4: Distance hurts?
+
+Is there any evidence that shots closer to the basket are successful more often? To answer this question:
+
+- Introduce a new variable `d` into the data that captures the distance of a player from the basket (basket is in [0,0] for variables `original_x` and `original_y`).
+
+```{r}
+# Use mutate to introduce new variable; use Pythagorean theorem for distance
+pbp = pbp |>
+    mutate(
+        d = sqrt((original_x^2) + (original_y^2))
+    )
+```
+
+- Draw side-by-side boxplots of distance by result and team (using `ggplot2`). Interpret. (Hint: you can put either `result` or `team` on the x-axis and the remaining variable into facet)
+
+```{r}
+# Use geom_boxplot and facet_wrap
+pbp |> filter(team!="", result!="") |> # remove blank rows for team and result
+    ggplot() +
+    geom_boxplot(aes(x = result, y = d)) +
+    facet_wrap(~team)
+```
+
+We can see that the median distance for shots missed is higher than the median distance for shots made across nearly all teams. Only Golden State has similar box plots for made and missed. Therefore, for most teams, distance does appear to make a difference.
+
+
+### Question #5: Who is playing?
+
+Variables `h1` through `h5` and `a1` through `a5` are the five players of the home team and the away team on the field at that moment, in positions 1 through 5.
+
+- Reshape the data set to combine all player variables. Extract position numbers. 
+
+```{r}
+# Use pivot_longer to convert multiple columns and values into two columns
+# Then mutate those original column names (a1, etc.) into just the numbers using parse_number
+positions = pbp |>
+    pivot_longer(
+        cols = a1:h5,
+        names_to = "position",
+        values_to = "position_player"
+    ) |>
+    mutate(
+        position_num = parse_number(position)
+    )
+```
+
+- For each game, identify how many players were playing in each position. 
+
+```{r}
+# Group by game_id (for each game) and position_num (each position), then count unique number of player names
+unique_players = positions |>
+    group_by(game_id, position_num) |>
+    summarize(
+        num_players = length(unique(position_player)),
+        .groups = "drop"
+    )
+unique_players
+```
+
+In game 1 (21700001), there were 11 players in position 1, 15 in position 2, 19 in position 3, 19 in position 4, and 19 in position 5. (game 2, 3, etc...) <br>
+These totals do not distinguish between home and away teams, which we could do by a different grouping:
+
+```{r}
+# Group by game_id (for each game) and position (each team with differentiation between home and away), then count unique number of player names
+unique_players2 = positions |>
+    group_by(game_id, position) |>
+    summarize(
+        num_players = length(unique(position_player)),
+        .groups = "drop"
+    )
+unique_players2
+```
+
+This then shows the breakdown for home and away. There are still multiple people recorded in the different positions for each team in each game.
+
+
+
+- Draw side-by-side boxplots of the number of players by position. Describe the plot and what it means in 2-3 sentences.
+
+```{r}
+# Using the first dataset (unique_players) here for boxplot clarity
+# Must convert position_num to a factor for boxplot to work correctly
+unique_players |> ggplot() +
+    geom_boxplot(aes(x = as.factor(position_num), y=num_players)) +
+    labs(
+        title = "Summary of unique players by position",
+        subtitle = "For 5 NBA games",
+        x = "Position number",
+        y = "Number of unique players"
+    )
+```
+
+In general, we see the smallest median number of players for position 1, with an increasing number of median players as we move up position numbers. We also see similar spreads for positions 1 and 2 and position 3 and 4, with almost no differences in the number of unique players for position 5. This shows that position 5 has many changes (largest median number of unique players over all 5 games), while position 1 has few (smallest number of unique players over all 5 games).
