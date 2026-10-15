@@ -1,0 +1,383 @@
+---
+title: "DS 2020 - Sample Midterm #2"
+author: "Sample Solutions"
+format:
+    html:
+        embed-resources: true
+---
+
+
+```{r}
+#| label: setup
+#| echo: false
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message=FALSE)
+```
+
+## Overview
+
+This is an open book, open note exam. You have 80 mins of time to submit your answers to the questions. 
+I expect you to adhere to academic integrity, i.e., all of the work shown is your own. Do not solicit, accept, or give any direct or indirect help on the questions from or to anyone. Do not use GenAI on this exam.
+
+Please be aware that you will have to sign off on the following statement during the submission process:
+
+> I affirm that the work on this exam is my own. I will not use any outside sources (such as GenAI) or people to help me, nor will I share any part of this exam or my work with others without permission of the instructor.
+
+## Tammar Wallabies
+
+For the following questions we are going to investigate growth of Tammar Wallabies. [Wallabies](https://en.wikipedia.org/wiki/Wallaby) look like small kangaroos and are in the same family of marsupials as kangoroos. They are native to Australia and New Guinea. 
+
+![The picture was taken in an Australian petting zoo. Do not feed wild animals :)](wallaby.png)
+
+
+
+The data were provided by Dr Jeff Wood, CSIRO, Canberra: 
+```{r}
+#| label: read-data
+wallabies <- read.table("http://www.statsci.org/data/oz/wallaby.txt", stringsAsFactors = FALSE, sep="\t", header=TRUE)
+```
+
+Most body measurements are taken in (tenths of) millmeters. 
+
+| Variable 	| Description                               	|   	| Variable 	| Description                  	|
+|----------	|-------------------------------------------	|---	|----------	|------------------------------	|
+| Anim     	| animal identifier                         	|   	| Arm      	| length of arm                	|
+| Sex      	| 1 = male, 2 = female                      	|   	| Leg      	| length of leg                	|
+| Loca     	| location of animal                        	|   	| Pes      	| length of foot               	|
+| Leng     	| length of animal (tenths of a millimiter) 	|   	| Tail     	| length of tail               	|
+| Head     	| length of head                            	|   	| Weight   	| weight (in tenths of a gram) 	|
+| Ear      	| length of ear                             	|   	| Age      	| age in days from birth       	|
+
+
+Provide code for all of your answers. Make sure to include answers to each of the questions outside of the code chunks.
+
+### Question 1: getting an overview of the data
+
+- How many observations are there in total? 
+
+```{r}
+# Use dim() to find rows (observations) and columns (variables) or just nrow()
+dim(wallabies)
+
+# or just nrow()
+nrow(wallabies)
+```
+
+There are 1463 observations in the dataset.
+
+
+- The variables `Anim`, `Sex`, and `Loca` should be encoded as factor variables. Check that this is the case. If they are not, fix the data so that they are encoded as factors.
+
+```{r}
+# Check if they are factors.
+is.factor(wallabies$Anim)
+is.factor(wallabies$Sex)
+is.factor(wallabies$Loca)
+
+# All false, so we can use factor() or fct() to make them factors. (Multiple ways to do this! This is just one method.)
+library(tidyverse)
+# Using fct; since both Sex and Anim are currently int, we have to make them characters first, then convert to factors. (This would be true if you used factor() as well.)
+wallabies = wallabies |>
+    mutate(
+        Anim = fct(as.character(Anim)),
+        Sex = fct(as.character(Sex)),
+        Loca = fct(Loca)
+    )
+str(wallabies)
+```
+
+From the structure output, we see that animal, sex, and location are all factor variables.
+
+
+- Which measurements have the largest numbers of missing values? Fewest numbers of missing values? 
+
+```{r}
+# Find the total number (sum) of NAs for each measurement column:
+wallabies |>
+    summarize(
+        Leng_missing = sum(is.na(Leng)),
+        Head_missing = sum(is.na(Head)),
+        Ear_missing = sum(is.na(Ear)),
+        Arm_missing = sum(is.na(Arm)),
+        Leg_missing = sum(is.na(Leg)),
+        Pes_missing = sum(is.na(Pes)),
+        Tail_missing = sum(is.na(Tail)),
+        Weight_missing = sum(is.na(Weight)),
+        Age_missing = sum(is.na(Age))
+    )
+```
+
+From the output, we see that both the length of head measurements and age measurements have no missing values (fewest number). The length of the animal has the largest number of missing values at 1183.
+
+
+- Use `ggplot2` to draw a scatterplot of length of head by age. Color points by sex. Describe the relationship(s) in three to four sentences. 
+
+```{r}
+# Using ggplot, geom_point; color= goes in aes since Sex is a variable.
+wallabies |>
+    ggplot() +
+    geom_point(aes(x = Age, y = Head, color = Sex)) +
+    labs(
+        x = "Age in days from birth",
+        y = "Length of head (tenths of mm)",
+        title = "Head length by age in Tammar Wallabies"
+    )
+```
+
+The graph follows a curved trend and is generally increasing. The two sexes tend to grow at about the same rate until around day 300, when the pattern starts to diverge. At that point, females start to have smaller head lengths than males. By day 750, this has almost completely diverged. The head length for both sexes levels off around that same time (day 750).
+
+
+- How many different animals were observed? How many non-missing measurements of head length are there on average for each animal?
+
+```{r}
+# Since Anim is a factor, can use nlevels:
+nlevels(wallabies$Anim)
+
+# We saw earlier that there were no missing values of head length, so we can group by Anim (each animal observed) and look at the average number of observations across the dataset:
+wallabies |>
+    group_by(Anim) |>
+    tally() |>
+    summary()
+
+# However, if we didn't know that, we could filter out where Head is NA first:
+wallabies |>
+    filter(!is.na(Head)) |>
+    group_by(Anim) |>
+    tally() |>
+    summary()
+```
+
+There were 77 animals observed. On average, there are 19 non-missing measurements of head length for each animal.
+
+
+
+- Do animals change locations often? Check that *only* animal 125 is observed in two different locations. For animal 125 plot head length by age, color by location. Describe. 
+Exclude the likely outlier from further consideration.
+
+```{r}
+# Pair animals with locations
+location = wallabies |>
+    count(Loca, Anim)
+
+# Then check if there are any duplicates in Anim
+# duplicated() looks at if there are repeated values and returns the first time a value is repeated; with the fromLast option, it does the same but in reverse, so this will list all instances of duplication
+location[(duplicated(location$Anim) | duplicated(location$Anim, fromLast = TRUE)),]
+
+# We can also check the length of Anim versus unique(Anim):
+length(location$Anim)
+length(unique(location$Anim))
+# This shows there is only 1 difference between the lengths, so there is only one duplicate (told to us as animal 125)
+```
+
+We see that only animal 125 is duplicated; it was observed in location Ha and location H1. <br>
+**or** <br>
+We see that the columns for animal differ by 1 if we specify unique animal values, so 125 is the only duplicate.
+
+
+```{r}
+# Plot animal 125 only:
+wallabies |>
+    filter(Anim == 125) |>
+    ggplot() +
+    geom_point(aes(x = Age, y = Head, color=Loca))
+```
+
+On the plot, we see one observation of animal 125 in location Ha. That observation does not fit with the overall trend, as the animal's age increased slightly but its head length would have decreased. This is probably a misidentification, so we will filter out the row.
+
+```{r}
+# Remove the observation of animal 125 in location Ha
+wallabies = wallabies |> 
+    filter(!(Anim == 125 & Loca=="Ha"))
+```
+
+
+
+- Plot a barchart of the number of animals in each location (not the number of times an animal was observed there). Order locations from most animals to least.
+
+```{r}
+# We can use the location dataset we made earlier (just filter out 125 in Ha) to find the number of animals (rows) in each location:
+anim_loca = location |>
+    filter(!(Anim == 125 & Loca=="Ha")) |>
+    group_by(Loca) |>
+    summarize(
+        n = n()
+    )
+
+# Use geom_col since we have the counts in the dataset and use fct_reorder to sort by median (which will do smallest to largest) so add fct_rev to go from largest to smallest
+anim_loca |>
+    ggplot() +
+    geom_col(aes(x = fct_rev(fct_reorder(.f=Loca, .x=n, .fun=median)), y=n)) +
+    labs(
+        x = "Location of observation",
+        y = "Number of wallabies observed",
+        title = "Number of wallabies observed in each location"
+    )
+```
+
+From the chart, we see that locations Ha and G had the most number of observed wallabies (21 each), while locations H12, H11, H5, and H8 had the least number (1 each).
+
+
+### Question 2: finding oddities
+
+Consider the visualization below
+
+![](wallabies-2.png)
+
+There are two sets of arrows pointing towards 'odd' values.
+
+- Describe what is 'odd' about the values the grey arrows point to. Identify the animals with these observations. Filter on them and draw the above plot for just these animals. Describe your finding(s).
+
+```{r}
+# Add labels by animal numbers to find which animals
+wallabies |>
+    ggplot(aes(x = Age, y = Weight, color = Sex, label=Anim)) +
+    geom_point() +
+    geom_text(hjust=0, vjust=0)
+```
+
+The animals the gray arrows point to are around age 500 days but weigh much less than other animals at that same age. <br>
+Based on the plot, the three dots represent animal 125 and animal 75.
+
+```{r}
+# Filter by animals 125 and 75:
+wallabies |>
+    filter(Anim == 125 | Anim == 75) |>
+    ggplot(aes(x = Age, y = Weight, color = Sex, label=Anim)) +
+    geom_point() +
+    geom_text(hjust=0, vjust=0)
+```
+
+Based on this plot, animal 75 appears to have lost a lot of weight right before day 500 and then regains it. <br>
+For animal 125, it appears that the "odd" observation was the last observation of this particular animal, and she hadn't gained much weight from day 325 (or so) until this observation right before day 500. This may mean that she had stopped growing or had something wrong with her, as she was not observed after.
+
+
+
+- Draw a plot for these animals using age and head length. Compare and describe.
+
+```{r}
+# Change y to head length:
+wallabies |>
+    filter(Anim == 125 | Anim == 75) |>
+    ggplot(aes(x = Age, y = Head, color = Sex, label=Anim)) +
+    geom_point() +
+    geom_text(hjust=0, vjust=0)
+```
+
+As both animals' head length measurements follow the typical trend we saw in the above graphs of all wallabies' age and head lenght, they were still growing during these weigh-ins. Perhaps they were misweighed at one point or had experienced a traumatic event, such as drought or famine, that caused their lower weight or drop in weights.
+
+
+- The blue arrows point to three blue points surrounded by red values. Identify the animal(s) with these observations. Draw the above plot of this/these animal(s) in a different color on top of all female wallabies. Are these females just heavy?
+
+```{r}
+# Since all are female (Sex is 2), we can filter on those to make it easier to see their numbers:
+wallabies |>
+    filter(Sex == 2) |>
+    ggplot(aes(x = Age, y = Weight, label=Anim)) +
+    geom_point() +
+    geom_text(hjust=0, vjust=0)
+```
+
+Based on this plot, the 3 dots that the navy arrows point to are for animals 79 and 81.
+
+```{r}
+# We can add a column that is yes/no for if they are a certain animal and use that for coloring:
+wallabies |>
+    mutate(wcolor = ifelse((Anim == 79) | (Anim == 81), "yes", "no")) |>
+    filter(Sex == 2) |>
+    ggplot(aes(x = Age, y = Weight, color=wcolor)) +
+    geom_point()
+```
+
+Based on the colors in this graph, the two wallabies are at the top of the weight-age curve for female wallabies. However, they are still similar to the other female wallabies until around day 750, where they diverge. They continued to gain weight where the others leveled off, so they may just be larger wallabies.
+
+
+
+-  Draw a similarly structured plot of leg length by age. Does your previous conclusion hold?
+
+```{r}
+# Replace above with Leg instead of Weight:
+wallabies |>
+    mutate(wcolor = ifelse((Anim == 79) | (Anim == 81), "yes", "no")) |>
+    filter(Sex == 2) |>
+    ggplot(aes(x = Age, y = Leg, color=wcolor)) +
+    geom_point()
+```
+
+From this graph, we see that while they are, once again, at the top of the curve (this time for age-leg length), their leg lengths are still in line with other female wallabies, even after the point where their weights diverge. Perhaps there is another variable not measured or not in the dataset that may account for their heavier weight but not larger body size (e.g., pregnancy).
+
+
+
+### Question 3: Next!
+
+Introduce  variable `N` into the `wallabies` data that consists of the number of times an animal has been observed (regardless of missing values).
+
+```{r}
+# Group by animal, count rows within each:
+wallabies = wallabies |>
+    group_by(Anim) |>
+    mutate(
+        N = n()
+    ) |>
+    ungroup() # important so we can use dataset without grouping structure
+```
+
+- How many animals were observed at least 15 times? 
+
+```{r}
+# Keep rows where N is at least 15, then count the number of distinct animals
+wallabies |>
+    filter(N >= 15) |>
+    summarize(
+        n_distinct(Anim)
+    )
+```
+
+There were 40 animals who were observed at least 15 times.
+
+
+
+- Which animal was observed most often? What else do we know about the animal? Describe three features.
+
+```{r}
+# There are a few different ways we can find this, but using which.max returns the first row where N is largest, giving us the animal number.
+wallabies[which.max(wallabies$N),]
+
+# We know this is animal 53, so let's find some other information:
+wallabies |>
+    filter(Anim == 53) |>
+    summary()
+```
+
+From the first line, we find that animal 53 has 50 observations. Using summary, we find the following:
+
+1. The wallaby is female.
+2. She was observed in location G.
+3. Her age at last observation was 1297 days, or about 3.5 years.
+
+
+
+- Introduce a variable `Next` into the `wallabies` data that contains the number of days until the next time the animal is observed. For the last observation, include a value of `NA` for `Next`.
+
+```{r}
+# lead() looks at the next value in the vector (here the next value in the column), so we can use that to calculate next age minus current age which gives us the days between, as long as the current Age is not the maximum age. If it is, fill in NA instead.
+wallabies = wallabies |>
+    group_by(Anim) |>
+    mutate(
+        Next = ifelse(Age != max(Age), lead(Age)-Age, NA)
+    )
+```
+
+- What is the average time (in days) between observations? Plot a histogram of `Next` with a binwidth of one week. Describe the plot in 2-3 sentences. 
+
+```{r}
+# Use ggplot, geom_histogram, binwidth=7 (7 days in a week)
+wallabies |>
+    ggplot() +
+    geom_histogram(aes(x = Next), binwidth=7) +
+    labs(
+        x = "Number of days between observations",
+        y = "Count",
+        title = "Number of days between observations of Tammar Wallabies"
+    )
+```
+
+Most wallabies are observed every 2-3 weeks (between 14 and 21 days), given the large number of observations in that bin. There are a few times when wallabies went a long time without being observed, as evidenced by the outliers around 150 days. However, most observations happened within 2 months of the previous observation.
