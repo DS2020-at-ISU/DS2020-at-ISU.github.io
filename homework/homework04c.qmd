@@ -1,0 +1,85 @@
+---
+title: "DS 2020 - Homework #4"
+author: "Your name"
+format:
+    html:
+        embed-resources: true
+---
+
+```{r}
+#| label: setup
+#| echo: false
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Liquor Sales in Iowa
+
+This dataset contains the spirits purchase information of Iowa Class “E” liquor licensees by product and date of purchase from January 1, 2017 to September 29, 2022. The dataset can be used to analyze total spirits sales in Iowa of individual products at the store level.
+
+For all of the questions use functionality from the  `tidyverse` whenever possible.
+
+1. **(0.5 pts)** Download the Quarto file with these homework instructions to use as a template for your work. Make sure to replace "Your Name" in the YAML with your name.
+
+2. The code below downloads the data from the Iowa Portal and saves a local copy to your machine. The first time you run this code, make sure you have a good internet connection and enough space on your machine (~50 MB). If the local copy exists, re-knitting the file will load the (binary) file from disk and be much faster. 
+```{r}
+if (!file.exists("ames-liquor.rds")) {
+  url <- "https://github.com/ds202-at-ISU/materials/blob/master/03_tidyverse/data/ames-liquor.rds?raw=TRUE"
+  download.file(url, "ames-liquor.rds", mode="wb")
+}
+sales <- readRDS("ames-liquor.rds")
+```
+
+3. **(2 pts)** Quick fact overview:
+
+  - How many observations are in `sales`?
+  - How many different cities are in the data? (Variable `City`, careful, trick question!)
+  - How many different stores are in the data? Check first with `Store Name`, then with `Store Number`. Discuss differences (give an example), and then answer the question of how many different stores are in the data set.
+  
+```{r}
+
+```
+
+> answers
+
+
+4. **(2 pts)** Data cleaning 
+  - Extract geographic latitude and longitude from the variable `Store Location`
+  - Check variable types. Pick five variables that need to be converted to a different type and fix those. Provide an explanation.
+  - Use the package `lubridate` to convert the `Date` variable to a date. Then extract year, month, and day from the variable `Date`
+  
+```{r}
+
+```
+
+> explanation for variables
+
+
+5. **(2 pts)** First overview
+  - Plot a scatterplot of lat and long of store locations. 
+  - Provide a visual breakdown of the liquor category (by `Category Name`). Include volume sold in the breakdown. Make sure that all labels are readable.
+  - Describe the plots.
+  
+```{r}
+
+```
+
+> descriptions
+
+
+6. **(3 pts)** Find the daily liquor sales in Ames in 2021 
+    - Summarize number of sales, volume of liquor sold, and amount of money spent. 
+    - Plot volume sold by day (use a scatterplot of volume by day and facet by month). Describe any patterns.
+    - Find the dates for ISU football home games in Fall 2021 (make use of the internet!). Can you see a pattern? Describe your finding.
+
+```{r}
+
+```
+
+> patterns
+
+
+7. **(0.5 pts)** Ensure that your submission is reproducible. We will load your qmd file into Positron and render it. This should match your submitted HTML file.
+
+
+For the submission: On Canvas, submit your solution in a Quarto (qmd) file and the corresponding HTML file with it, in one zipped folder. 
+
