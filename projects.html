@@ -75,7 +75,7 @@ You're not limited to these resources, and in fact you're encouraged to venture 
 <h3>Deliverables</h3>
 
 <ol>
-  <li>Group members: due November 9</li>
+  <li>Team members: due November 9</li>
   <li>Proposal: due November 20</li>
   <li>Sign up for presentation: due December 04</li>
   <li>Presentation (draft slides): due day of presentation (December 07 or 09)</li>
@@ -84,7 +84,7 @@ You're not limited to these resources, and in fact you're encouraged to venture 
   <li>Peer evaluation: due December 11 (open until December 13)</li>
 </ol>
 
-<h4>Group members</h4>
+<h4>1. Team members</h4>
 
 Your first deliverable is a statement of the group you will be working with for your project. Each team should consist of 3-4 members. Please use the discussion board on Canvas to help find team members. <br><br>
 
@@ -110,7 +110,7 @@ Everyone on your team should work together to submit the same document that incl
     </ul>
 </ul>
 
-<h4>Proposal</h4>
+<h4>2. Proposal</h4>
 
 This is a draft of the introduction section of your project as well as a data analysis plan and your dataset. You will submit a Quarto (qmd) file and rendered HTML file that include the following:
 
@@ -166,17 +166,116 @@ The grading scheme for the project proposal is as follows. Note that after you r
   </table>
 </div>
 
-<h4>Sign up for presentation</h4>
+<h4>3. Sign up for presentation</h4>
+
+Sign ups will be for the two presentation days (December 7 and December 9). There will be a limited number of slots each day and are allocated on a first come, first serve basis. <br>
+Have one member of your team select the date for your team. The link for signups will be available on Canvas. <br>
+The order of presentations within each day will be generated randomly. The final presentation order for both days will be posted on Canvas. <br>
+When you are not presenting, you will watch presentations from other teams and provide feedback in the form of peer evaluations on both days. This will count as part of your final project grade. <br><br>
 
 <h4>Presentation (slides & verbal presentation)</h4>
 
+The presentation should be <b>5 minutes maximum</b>, and each team member should say something substantial. <br><br>
+
+Prepare a slide deck using the template in your repo. This template uses "revealjs" and allows you to make presentation slides using Quarto. More information is available through the <a href="https://quarto.org/docs/presentations/revealjs/">Quarto revealjs information page</a>. You may adjust the default settings in the YAML to suite your needs. Before you finalize your presentation, make sure the code chunks are turned off with echo=FALSE in the setup options. (See Tips below for exceptions.)<br><br>
+
+There isn't a limit to how many slides you can use, only a time limit (5 minutes total). Your presentation should not just be an account of everything you tried ("we did this, then we did this, etc."), but it should convey what choices you made, why you made them, and what you found. <br><br>
+
+Each team member should get a chance to speak during the presentation. <br><br>
+
+The grading scheme for the presentation is as follows:
+<div>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Section</th>
+        <th>Points</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Time management: Did the team divide the time well amongst themselves or get cut off going over time?</td>
+        <td>4 points</td>
+      </tr>
+      <tr>
+        <td>Content: Is the research question well designed and are the data used relevant to the research question?</td>
+        <td>5 points</td>
+      </tr>
+      <tr>
+        <td>Professionalsim: How well did the team present? Does the presentation appear to be well practiced? Did everyone get a chance to say something meaningful about the project?</td>
+        <td>5 points</td>
+      </tr>
+      <tr>
+        <td>Teamwork: Did the team present a unified story, or did it seem like independent pieces of work patched together?</td>
+        <td>6 points</td>
+      </tr>
+      <tr>
+        <td>Content: Did the team use appropriate procedures and interpret the results correctly?</td>
+        <td>10 points</td>
+      </tr>
+      <tr>
+        <td>Creativity and Critical Thought: Is the project carefully thought out? Are the limitations carefully considered? Does it appear that time and effort went into the planning and implementation of the project?</td>
+        <td>10 points</td>
+      </tr>
+      <tr>
+        <td>Slides: Are the slides well organized, readable, not full of text, and feature figures with legible labels, legends, etc.?</td>
+        <td>10 points</td>
+      </tr>
+      <tr>
+        <td><b>Total</b></td>
+        <td><b>50 points</b></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <h4>Written report</h4>
+
+Along with your presentation slides, we want you to provide a summary of your project in the README of your repository. The summary should be an extended version of your proposal and include the following elements:
+
+<ul>
+  <li><b>Section 1: Introduction</b>: The introduction should introduce your general research question(s) and the background of your data (where it came from, how it was collected, etc.).</li>
+  <li><b>Section 2: Data</b>: This should include a description of the dataset you used, including the number of observations and number of variables (dimensions). Include a brief description of important variables. Include any data cleaning steps you took. </li>
+  <li><b>Section 3: Data analysis</b>: This section should make up the bulk of your report and include how you addressed your research question(s). This section should include graphs and tables, with appropriate titles and formatting.</li>
+  <li><b>Section 4: Conclusions</b>: Write a brief summary of what you found. Are you able to draw any conclusions based on this information?</li>
+  <li><b>Section 5: Future directions</b>: What would you like to be able to do with this data that you were not able to do? Did your investigations lead to any new questions?</li>
+</ul>
+<br>
 
 <h4>Peer evaluation</h4>
 
 <h3>Repo organization</h3>
 
+Project repositories will be set up through our Classroom 50 classroom, so that all teams have access to the same templates.<br><br>
+
+The following folders and files need to be in your final repository:<br>
+<ul>
+  <li>presentation.qmd and presentation.html: Your presentation slides</li>
+  <li>README.qmd and README.md: Your written report</li>
+  <li>/data: Your dataset in CSV or RDS format and your data dictionary</li>
+  <li>/proposal: Your project proposal</li>
+</ul>
+<br>
+Style and format do count for this assignment, so please take the time to make sure everything looks good and your data and code are properly formatted. <br><br>
+
 <h3>Tips</h3>
+
+<ul>
+  <li>You're working in the same repo as your teammates, so merge conflicts will happen, issues will arise, and that's fine! Commit and push often, and pull often, and ask questions when stuck.</li>
+  <li>Review the grading guidelines below and ask questions if any of the expectations are unclear.</li>
+  <li>Code: In your presentation, your code should be hidden (echo = FALSE) so that your document is neat and easy to read. However, your document should include all your code such that if I render your Quarto file, I should be able to obtain the results you presented.</li>
+    <ul>
+      <li>Exception: If you want to highlight something specific about a piece of code, you are welcome to show that portion in the slides.</li>
+    </ul>
+  <li>Teamwork: You are to complete the assignment as a team.</li>
+  <ul>
+    <li>Make sure each team member is contributing, both in terms of quality and quantity of contribution. We will be reviewing commits from different team members.</li>
+    <li>All team members are expected to contribute equally to the completion of this assignment, and team evaluations will be given at its completion to augment the commit history. Anyone judged to not have sufficient contribution to the final product will have their grade penalized.</li>
+    <li>Set aside time to work together and apart (physically).</li>
+    <li>While different team members may have different backgrounds and abilities, it is the responsibility of every team member to understand how and why all code and approaches in the final product work.</li>
+  </ul>
+  <li>When you're done, review the documents on GitHub to make sure you are happy with the final state of your work. Then go get some rest!</li>
+</ul>
 
 <h2>Grading</h2>
 
@@ -185,6 +284,10 @@ The grading scheme for the project proposal is as follows. Note that after you r
 <h3>Team peer evaluation</h3>
 
 <h2>Late work policy</h2>
+
+
+<h4>Acknowledgements</h4>
+This project was adapted from <a href="https://datasciencebox.org/">Data Science in a Box</a>, which is licensed under a <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a> license.
 
 
 <!--
