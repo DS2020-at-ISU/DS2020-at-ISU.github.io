@@ -1,0 +1,68 @@
+---
+title: "DS 2020 - Homework #5"
+author: "Your name"
+format:
+    html:
+        embed-resources: true
+---
+
+```{r}
+#| label: setup
+#| echo: false
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Box office at the movies
+
+The data set `box` of the package `classdata` contains weekly box office gross for all movies in theaters from 2013 until 2022. See `?box` for a description of all variables in the data set.
+
+For all of the questions use functionality from the  `tidyverse` whenever possible.
+
+1. **(0.5 pts)** Download the Quarto (qmd) file with these homework instructions to use as a template for your work. Make sure to replace "Your Name" in the YAML with your name.
+
+2. **(2 pts)** Draw a line for each movie showing total gross (`Total.Gross`) over time. Describe the plot.
+
+```{r}
+
+```
+
+> Answer here.
+
+
+3. **(3 pts)** Find monthly summaries for (a) the number of different movies in theaters and (b) box office gross. 
+    - Draw lines of these summaries for each year (in two separate plots). 
+    - Describe the plots in words. 
+    - Are there seasonal trends? <br>
+
+*In your answer, you should show the plots and describe the trends you see in the plots.*
+
+Hint: use `lubridate` to extract `year` and `month` from the date at which box office data was released. 
+
+```{r}
+
+```
+
+> Answer here.
+
+
+4. **(3 pts)** Find box office gross by day of the year (check `?yday`) for each year (we don't actually have daily data - we only have data for every seven days). Plot cumulative yearly gross for each year by day of the year. Describe the plot.
+
+*Extra point for nice labels of very successful movies.*
+
+```{r}
+
+```
+
+> Answer here.
+
+
+5. **(1 pt)** What kind of year do you expect the remainder of 2022 to be in terms of box office revenues from movies? Defend your answer using the plots you made.
+
+> Answer here.
+
+
+6. **(0.5 pts)** Ensure that your submission is reproducible. We will load your qmd file into Positron and render it. This should match your submitted HTML file.
+
+
+For the submission: On Canvas, submit your solution in a Quarto (qmd) file and the corresponding HTML file with it, in one zipped folder. 
+
