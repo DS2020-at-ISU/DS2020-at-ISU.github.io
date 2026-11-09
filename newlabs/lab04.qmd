@@ -1,0 +1,250 @@
+---
+title: "DS 2020 - Lab #4: Scraping (into) the Hall of Fame"
+date: "`r Sys.Date()`"
+format: 
+    html:
+        embed-resources: true
+---
+
+```{r}
+#| label: setup
+#| echo: false
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+## Overview
+
+In this lab, you will:
+
+1. Scrape the 2026 Hall of Fame voting results
+2. Clean and reformat the data
+3. Compare the scraped data to the `HallOfFame` table in the `Lahman` package
+4. Save the updated dataset to a `csv` file
+5. Document the process
+
+<br><br>
+
+The deliverables are:
+
+* Your individual `R` script in the team repo (one per team member)
+    + Commenting is part of this!
+* Final `csv` (one per team)
+* Updated README to answer questions
+
+
+## Data Background
+
+### Lahman Data Package
+The Lahman data package is based on [Sean Lahman](https://www.seanlahman.com/)'s  Baseball [Database](https://sabr.org/lahman-database/).
+
+The `HallOfFame` table does contain some Hall of Fame data for 2026. You can compare your scraped data with the 2026 data to see what matches and what does not match.
+
+
+### Baseball Reference
+
+The site baseball-reference.com has grown out of Sean Lahman's work and is now maintained independently. It also has tables with Hall of Fame information, e.g., for 2026:
+
+[https://www.baseball-reference.com/awards/hof_2026.shtml](https://www.baseball-reference.com/awards/hof_2026.shtml)
+
+
+### Important note!
+
+The Baseball Reference page and the Lahman `HallOfFame` table do not have to match row-for-row.
+
+Baseball Reference shows the full BBWAA ballot for 2026.
+
+The Lahman `HallOfFame` table stores official Hall of Fame voting records in a different format, and it may include different voting bodies.
+
+This means that your scraped data may have more rows than the Lahman data for 2026.
+
+That is okay.
+
+Part of the goal is to understand how the two data sources are structured and where they differ.
+
+
+## Process
+
+### Step 1: Create your own R script
+
+1. Accept the link to Classroom 50 on the Canvas Lab #4 assignment
+2. Since you are working in your final project teams, we have set up your teams for you already. Once one person has accepted, the repo will populate.
+3. Clone the repo to your local session (see below for Positron steps).
+4. Each person should make their own `R` script titled `progress_report_<your name>.R`. For example, mine would be `progress_report_jennifer_daddysman.R`. 
+5. Copy the information from the `progress_report_template.R` script into the file you have created and save this to your repo.
+6. Commit the file and push.
+
+
+### Step 2: Scrape the data
+
+The following packages should already be in your R script. Feel free to add other packages as you see fit.
+
+```{r}
+library(tidyverse)
+library(rvest)
+library(Lahman)
+```
+
+Steps:
+
+1. Use the `rvest` package to read the table of Hall of Fame voting results for 2026 from [https://www.baseball-reference.com/awards/hof_2026.shtml](https://www.baseball-reference.com/awards/hof_2026.shtml).
+2. Store the scraped data in a data frame called `hall2026`.
+
+**Note:** Be polite! Only scrape the data once. Don't run your whole R script; only run the sections that you currently need.
+
+
+### Step 3: Clean the data
+
+What steps are necessary to get the scraped data into a useful format? You should think about questions such as:
+
+1. Are the variable names correct?
+2. Which columns do you want to keep?
+3. Which variables should be numeric?
+4. How can you identify who was inducted?
+
+Document your process in your section of the `README.md` file and in your code comments in your R script.
+
+
+### Step 4: Compare to Lahman
+
+The Lahman data can help us understand what information is stored in the `HallOfFame` table:
+
+```{r}
+HallOfFame |>
+    filter(yearID == 2026)
+```
+
+Compare your scraped data to the Lahman data.
+
+(Potential) questions to think about and to document in your code comments and your section of the `README.md`:
+
+1. How many rows are in your scraped data?
+2. How many are in the Lahman dataset for 2026?
+3. Why might these numbers be different?
+4. Which players were inducted according to the BBWAA table?
+5. Are the same players represented in Lahman? 
+
+
+### Step 5: Save the dataset
+
+Each team member should create a cleaned Hall of Fame voting dataset for the year 2026. Compare your results and, as a team, select one as your final result. Describe why you made the choice you did in the `README.md`.
+
+Your final dataset should include the cleaned version of the Baseball Reference Hall of Fame data (scraped data). **At a minimum**, the `csv` should include the following:
+
+1. candidate name
+2. year
+3. votes (number player received)
+4. ballots (total number of ballots)
+5. needed (number of votes needed)
+6. percent of vote
+7. whether the candidate was inducted
+
+Your final data may include more columns.
+
+
+### Step 6: Submission
+
+1. Each individual: Push changes to your file `progress_report_<your name>.R` to the repo. We will check the commit history and in-file comments for grading.
+2. Each individual: Make sure your process for Steps 3 and 4 is documented in the `README.md` file (pushed successfully).
+3. As a team: Push one final `csv` meeting the above requirements to the repo. Include your reasoning in the `README.md`.
+
+**Grading**: We expect equal contributions from all members in a team. For the grading, we will make use of the GitHub commit history to verify that everyone contributed. *There will be different grades, if necessary.*
+
+**Submission**: All submissions to the GitHub repo will be automatically uploaded/collected for grading once the due date has passed. Please submit a link to your team's repo on Canvas (one per team).
+
+**Due date**: Monday at 5 pm. You have time until Monday at 11:59 pm to push final edits. Make sure that there are no commit issues.
+
+
+
+## Remember the GitHub steps
+
+1. Open a [git repository in Positron](https://positron.posit.co/git.html#open-a-git-repository) from the existing git repository for the assignment
+    A) New > New Folder from Git 
+    A) In "Repository URL", past the URL of your group's GitHub repository. You can find this under the `<>Code` button; just copy the `HTTPS` URL.
+    A) Set the parent folder to be the folder you created for this class.
+    A) Select "OK"
+
+1. In Positron, modify the `README.md` file as you complete the assignment.
+    * Make sure to pull and push often! This will avoid major commit issues later.
+
+1. Stage/add changes
+    A) Select "Source Control" in the left pane (looks like a branch)
+    A) Under "Changes", select the `+` to stage changes.
+
+1. Commit changes to your local repo. 
+    A) Add a commit message above the blue commit button
+    A) Select "Commit"
+
+1. Sync changes: once you have done a commit, select "Sync Changes". This will push changes and pull new changes from others.
+    * Errors? Do a separate pull action, resolve merge changes, then repeat.
+
+
+## Some Data Wrangling/Tidying Tricks
+
+### Variable names in line 1
+
+Obtain the column names from the first line as a variable. Overwrite the column names with the actual column names. Then delete the first line:
+
+```{r}
+#| eval: false
+data <- tables[[1]]
+actual_col_names <- data[1, ]
+colnames(data) <- actual_col_names
+data <- data[-1, ]
+```
+
+
+### Character to numeric
+
+Make sure all numeric variables are saved as numeric. The code below is just an example:
+
+```{r}
+#| eval: false
+data$Votes <- as.numeric(data$Votes)
+data$percent_vote <- readr::parse_number(data$`%vote`)
+```
+
+### Using `gsub`
+
+`gsub(pattern, replacement, x)`:  replace all occurrences of `pattern` in vector `x` by the string `replacement`.
+
+```{r}
+x <- c("David Ortiz", "X-Barry Bonds", "X-Roger Clemens")
+
+gsub("X-", "Oh no! ", x)
+
+gsub("X-", "", x)
+```
+
+
+### Combining datasets with the same variables
+
+If two data frames have the same variable names, we can use the command **`rbind`** (row bind) to concatenate them.
+
+```{r}
+#| eval: false
+x1 <- data.frame(id=1:2, name=c("A", "B"))
+x2 <- data.frame(id=3:4, name=c("C", "D"))
+dframe <- rbind(x1, x2)
+```
+
+Don't forget to save the result!
+
+
+### Exporting `csv` files
+
+**`write.csv`** writes a data frame into a comma-separated values file (extension csv):
+
+```{r}
+#| eval: false
+write.csv(dframe, file="some-file.csv", row.names = FALSE)
+```
+
+Make sure to not export the row names, otherwise each successive read & write of the file adds another column in the front.
+
+
+**`write_csv`** is not part of base, but faster, and does not convert special characters into `.`
+
+```{r}
+#| eval: false
+readr::write_csv(dframe, file="some-other-file.csv")
+```
