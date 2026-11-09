@@ -22,7 +22,7 @@ In this lab, you will:
 4. Save the updated dataset to a `csv` file
 5. Document the process
 
-<br><br>
+<br>
 
 The deliverables are:
 
@@ -69,7 +69,7 @@ Part of the goal is to understand how the two data sources are structured and wh
 1. Accept the link to Classroom 50 on the Canvas Lab #4 assignment
 2. Since you are working in your final project teams, we have set up your teams for you already. Once one person has accepted, the repo will populate.
 3. Clone the repo to your local session (see below for Positron steps).
-4. Each person should make their own `R` script titled `progress_report_<your name>.R`. For example, mine would be `progress_report_jennifer_daddysman.R`. 
+4. Each person should make their own `R` script titled `progress_report_<your name>.R`. For example, mine would be `progress_report_jennifer.R`. 
 5. Copy the information from the `progress_report_template.R` script into the file you have created and save this to your repo.
 6. Commit the file and push.
 
