@@ -1,0 +1,92 @@
+---
+title: "DS 2020 - Homework #6"
+author: "Your name"
+format:
+    html:
+        embed-resources: true
+---
+
+---
+title: "DS 2020 - Homework #6"
+author: "Your name"
+format:
+    html:
+        embed-resources: true
+---
+
+```{r}
+#| label: setup
+#| echo: false
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Data Licensing and Scraping Ethics
+
+This homework builds on the Considerations for Web Scraping lecture and Lab #4 by looking into data licensing and ethical considerations in web scraping.
+
+
+## Background
+
+Ownership of anything published on the world wide web is regulated by licenses. While sharing of materials and open access disseminates materials quickly, it does not mean that just because we can openly access something, it automatically belongs to us.
+
+Most relevant to us are two sets of licenses: software licenses and data licenses. Dealing with licenses is often tricky because of all the legal language.
+
+For our use, we want to answer some key questions:
+
+* Do authors want to be cited for their work? (**Attribution**)
+* Are the authors fine with others modifying their work and then sharing the modified work? (**Derivates**)
+* Are the authors fine with other people making a profit from those derivations? (**Commercial use**)
+* Who is responsible if the software does not do what it promises to do? (**Liability**)
+* What can and cannot be used as part of the derivation process? (**AI use**)
+
+
+Some references related to licensing:
+
+* R Packages 2nd edition, [Chapter 12: Licensing](https://r-pkgs.org/license.html) by Hadley Wickham and Jennifer Bryan
+* Research Outreach guide on [Creative Commons licensing](https://researchoutreach.org/articles/thought-leaders/license-to-share-how-the-creative-commons-licensing-system-encourages-the-remixing-and-reuse-of-published-materials/)
+
+
+## Assignment
+
+1. **(0.5 pts)** Download the Quarto (qmd) file with these homework instructions to use as a template for your work. Make sure to replace "Your Name" in the YAML with your name.
+
+
+2. **(1 point)** Under what license is the R package `ggplot2` published? What does that mean for use of its built-in `diamonds` dataset?
+
+> answer here
+
+
+3. **(6 points)** Find two different versions of a "diamonds" dataset on Kaggle. For each:
+    * Provide the link
+    * Identify its license
+    * Compare the dataset to `ggplot2::diamonds` (write some R code). Are they the same or different?
+
+```{r}
+# Dataset 1:
+# URL:
+# License:
+# Comparison code below:
+
+# Dataset 2:
+# URL:
+# License:
+# Comparison code below:
+```
+
+> same or different?
+
+
+4. **(1 point)** Why do you think there are so many datasets on Kaggle that resemble one another without attribution?
+
+> answer here
+
+
+5. **(1 point)** What license governs the [Iowa Liquor Sales data](https://data.iowa.gov/catalog/dataset/1263)? What does this allow you to do with the data?
+
+> answer here
+
+
+6. **(0.5 pts)** Ensure that your submission is reproducible. We will load your qmd file into Positron and render it. This should match your submitted HTML file.
+
+
+For the submission: On Canvas, submit your solution in a Quarto (qmd) file and the corresponding HTML file with it, in one zipped folder. 
